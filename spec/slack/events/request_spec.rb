@@ -26,9 +26,7 @@ RSpec.describe Slack::Events::Request do
         'X-Slack-Request-Timestamp' => timestamp,
         'X-Slack-Signature' => signature
       },
-      body: double(
-        read: body
-      )
+      raw_post: body
     )
   end
 
@@ -42,6 +40,7 @@ RSpec.describe Slack::Events::Request do
     expect(request.timestamp).to eq timestamp
     expect(request.version).to eq 'v0'
   end
+
   context 'time' do
     after do
       Timecop.return
